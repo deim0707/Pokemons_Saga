@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from "react-redux";
 import {RootState} from "../../Redux/reducer";
-import {changeCounter} from "./redux/counterActions";
+import {changeCounter} from "./redux/actionsCounter";
 
 interface Returned {
     value: number,

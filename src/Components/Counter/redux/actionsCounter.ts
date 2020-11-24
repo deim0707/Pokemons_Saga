@@ -1,13 +1,13 @@
-export enum CounterActions  {
+export enum ActionsCounter  {
     CHANGE_COUNTER = "COUNTER_CHANGE_COUNTER"
 }
 
 export interface ICounterActions {
-    type: CounterActions,
+    type: ActionsCounter,
     payload: number
 }
 
 export const changeCounter = (payload: number): ICounterActions => ({
-    type: CounterActions.CHANGE_COUNTER,
+    type: ActionsCounter.CHANGE_COUNTER,
     payload
 })

@@ -1,10 +1,26 @@
-import {createStore} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
+import createSagaMiddleware from "redux-saga";
+import startForkWatchers from "./saga";
 import rootReducer from "./reducer";
+
+
+const sagaMiddleware = createSagaMiddleware()
+
+const composeEnhancers =
+    (typeof window !== "undefined" &&
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })) ||
+    compose;
 
 const store = createStore(
     rootReducer,
-// @ts-ignore
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
 )
+
+sagaMiddleware.run(startForkWatchers)
 
 export default store;
