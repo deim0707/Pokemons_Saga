@@ -1,10 +1,8 @@
 import {combineReducers} from "redux";
 
-import reducerCounter from "../Components/Counter/redux/reducerCounter";
-import reducerPokemon from "../Components/PokemonList/redux/reducerPokemonList";
+import reducerPokemon from "../Pokemon/Redux/reducerPokemonList";
 
 const rootReducer = combineReducers({
-    counter: reducerCounter,
     pokemons: reducerPokemon
 })
 
