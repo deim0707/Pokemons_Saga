@@ -1,16 +1,18 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import usePokemon from "../../usePokemon.hook";
 
-interface PokemonList {
+interface IPokemon {
     name: string,
     id: number
 }
 
 interface Returned {
-
+    pokemonList: IPokemon[] | null,
+    activePokemon: number | null | undefined,
+    changeSelectedPokemon: Function,
 }
 
-const usePokemonList = () => {
+const usePokemonList = (): Returned => {
 
     const {pokemonMethods, pokemonState} = usePokemon()
 
@@ -18,26 +20,20 @@ const usePokemonList = () => {
         pokemonMethods.get_pokemon_list(15, 0)
     }, [])
 
-    const pokemonList: PokemonList[] | null = pokemonState.pokemonList && pokemonState.pokemonList.map(pokemon => ({
+    useEffect(() => {
+        pokemonMethods.get_pokemon(pokemonState.activePokemon.id)
+    }, [pokemonState.activePokemon.id])
+
+    const pokemonList: IPokemon[] | null = pokemonState.pokemonList && pokemonState.pokemonList.map(pokemon => ({
         name: pokemon.name,
         id: pokemonMethods.getPokemonIdxFromLink(pokemon.url)[1]
     }))
 
-    //todo вынести в редакс
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
-    // выделение айтема
-    const handleListItemClick = (
-        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-        index: number,
-    ) => {
-        setSelectedIndex(index);
-    };
-
 
     return {
         pokemonList,
-        selectedIndex,
-        handleListItemClick,
+        activePokemon: pokemonState.activePokemon.id,
+        changeSelectedPokemon: pokemonMethods.change_active_pokemon,
     }
 }
 

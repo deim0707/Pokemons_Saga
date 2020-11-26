@@ -1,19 +1,21 @@
 export interface IPokemonState {
     loading: boolean,
     error: boolean,
-    activePokemon: any,
+    activePokemon: ActivePokemon,
     pokemonList: any[] | null;
 }
 
-export interface IPokemonList {
-    next: string,
-    previous: string,
-    results: null,
+export interface ActivePokemon {
+    id: number | null | undefined,
+    value: any | null | undefined,
 }
 
 export const initialState: IPokemonState = {
     loading: false,
     error: false,
-    activePokemon: null,
+    activePokemon: {
+        id: null,
+        value: null,
+    },
     pokemonList: null,
 }

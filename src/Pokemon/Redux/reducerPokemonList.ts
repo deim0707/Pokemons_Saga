@@ -11,9 +11,15 @@ const reducerPokemon = (state = initialState, action: IPokemonAction): IPokemonS
         case ActionsPokemon.GET_POKEMON_LIST_ERROR:
             return {...state, error: true, loading: false};
         case ActionsPokemon.GET_POKEMON_SUCCESS:
-            return {...state, error: false, loading: false, activePokemon: action.payload}
+            return {
+                ...state,
+                loading: false,
+                activePokemon: {...state.activePokemon, value: action.body}
+            }
         case ActionsPokemon.GET_POKEMON_LIST_SUCCESS:
-            return {...state, error: false, loading: false, pokemonList: action.body.results}
+            return {...state, loading: false, pokemonList: action.body.results}
+        case ActionsPokemon.CHANGE_ACTIVE_POKEMON:
+            return {...state, activePokemon: {...state.activePokemon, id: action.id}}
 
         default:
             return state;

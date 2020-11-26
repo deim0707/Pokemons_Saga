@@ -6,8 +6,8 @@ const api = new PokemonApi();
 
 function* getPokemon(action: any) {
     try {
-        const pokemon = yield call(api.getPokemon, action.payload);
-        yield put({type: ActionsPokemon.GET_POKEMON_SUCCESS, payload: pokemon});
+        const pokemon = yield call(api.getPokemon, action.id);
+        yield put({type: ActionsPokemon.GET_POKEMON_SUCCESS, body: pokemon});
     } catch (e) {
         yield put({type: ActionsPokemon.GET_POKEMON_ERROR, payload: e.message});
     }
@@ -15,7 +15,7 @@ function* getPokemon(action: any) {
 
 function* getPokemonList(action: any) {
     try {
-        const pokemonList = yield call(api.getPokemonList, action.payload.limit, action.payload.offset);
+        const pokemonList = yield call(api.getPokemonList, action.limit, action.offset);
         yield put({type: ActionsPokemon.GET_POKEMON_LIST_SUCCESS, body: pokemonList});
     } catch (e) {
         yield put({type: ActionsPokemon.GET_POKEMON_LIST_ERROR, payload: e.message});

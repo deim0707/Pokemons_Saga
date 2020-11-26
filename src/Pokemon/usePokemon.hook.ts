@@ -1,6 +1,6 @@
 import {RootState} from "../RootRedux/reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {getPokemon, getPokemonList} from "./Redux/actionsPokemonList";
+import {changeActivePokemon, getPokemon, getPokemonList} from "./Redux/actionsPokemonList";
 import {IPokemonState} from "./Redux/initialStatePokemons";
 
 interface Returned {
@@ -8,6 +8,7 @@ interface Returned {
     pokemonMethods: {
         get_pokemon: Function,
         get_pokemon_list: Function,
+        change_active_pokemon: Function,
         getPokemonIdxFromLink: Function
     }
 }
@@ -18,6 +19,7 @@ const usePokemon = (): Returned => {
 
     const get_pokemon = (id: number) => dispatch(getPokemon(id));
     const get_pokemon_list = (limit: number, offset: number) => dispatch(getPokemonList(limit, offset));
+    const change_active_pokemon = (id:number) => dispatch((changeActivePokemon(id)))
 
     const getPokemonIdxFromLink = (link: string) => /\/(\d+)\/$/.exec(link)
 
@@ -31,6 +33,7 @@ const usePokemon = (): Returned => {
         pokemonMethods: {
             get_pokemon,
             get_pokemon_list,
+            change_active_pokemon,
             getPokemonIdxFromLink
         }
     }

@@ -5,16 +5,17 @@ import "./pokemonList.scss"
 
 
 const PokemonList: FC = () => {
-    const {pokemonList, selectedIndex, handleListItemClick} = usePokemonList();
+    const {pokemonList, activePokemon, changeSelectedPokemon,} = usePokemonList();
 
     const pokemonListElement = pokemonList && (
         <List component="nav" aria-label="main mailbox folders">
-            {pokemonList.map((pokemon, idx) => (
+            {pokemonList.map((pokemon) => (
                 <ListItem
+
                     key={pokemon.name}
                     button
-                    selected={selectedIndex === pokemon.id}
-                    onClick={(event) => handleListItemClick(event, pokemon.id)}
+                    selected={activePokemon === pokemon.id}
+                    onClick={() => changeSelectedPokemon(pokemon.id)}
                 >
                     <ListItemText primary={pokemon.name}/>
                 </ListItem>
