@@ -1,11 +1,11 @@
 export interface IPokemonState {
     loading: boolean,
     error: boolean,
-    activePokemon: ActivePokemon,
+    activePokemon: IActivePokemon,
     pokemonList: any[] | null;
 }
 
-export interface ActivePokemon {
+export interface IActivePokemon {
     id: number | null | undefined,
     value: any | null | undefined,
 }
@@ -19,3 +19,6 @@ export const initialState: IPokemonState = {
     },
     pokemonList: null,
 }
+
+
+

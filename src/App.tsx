@@ -1,10 +1,10 @@
 import React from 'react';
-import PokemonList from "./Pokemon/Components/PokemonList/PokemonList";
+import PokemonManePage from "./Pokemon/Components/PokemonManePage/PokemonManePage";
 
 function App() {
     return (
         <div className="App">
-            <PokemonList/>
+            <PokemonManePage/>
         </div>
     );
 }

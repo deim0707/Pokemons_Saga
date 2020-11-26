@@ -1,0 +1,12 @@
+.PokemonActive-wrapper {
+  min-width: 275px;
+
+  .PokemonActive-title {
+    font-size: 14px;
+  }
+
+  .PokemonActiveCharacteristics {
+    display: flex;
+    flex-direction: column;
+  }
+}

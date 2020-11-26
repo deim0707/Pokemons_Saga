@@ -21,7 +21,7 @@ const usePokemonList = (): Returned => {
     }, [])
 
     useEffect(() => {
-        pokemonMethods.get_pokemon(pokemonState.activePokemon.id)
+        if(pokemonState.activePokemon.id) pokemonMethods.get_pokemon(pokemonState.activePokemon.id)
     }, [pokemonState.activePokemon.id])
 
     const pokemonList: IPokemon[] | null = pokemonState.pokemonList && pokemonState.pokemonList.map(pokemon => ({
