@@ -1,6 +1,6 @@
 #Saga, Redux, Pokemons
 
- <a href="#">*Посмотреть*</a>
+ <a href="https://deim0707.github.io/Pokemons_Saga/build/index.html#/">*Посмотреть*</a>
 
 `/api` - функция запроса на бек, которую кладём в сагу
 
