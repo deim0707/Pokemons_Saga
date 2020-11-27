@@ -14,6 +14,7 @@ const usePokemonActive = (): Returned => {
     const {pokemonState, pokemonMethods} = usePokemon()
     const {id} = useParams() as Params;
 
+    // запрашиваем данные с бека, когда в ссылке появляется айди
     useEffect(() => {
         if (id && pokemonState.activePokemon.id !== id) pokemonMethods.get_pokemon(id)
     }, [pokemonState.activePokemon.id, id])
