@@ -7,11 +7,10 @@ import "./pokemonList.scss"
 const PokemonList: FC = () => {
     const {pokemonList, activePokemon, changeSelectedPokemon,} = usePokemonList();
 
-    const pokemonListElement = pokemonList && (
+    const pokemonListElement: JSX.Element | null = pokemonList && (
         <List component="nav" aria-label="main mailbox folders">
             {pokemonList.map((pokemon) => (
                 <ListItem
-
                     key={pokemon.name}
                     button
                     selected={activePokemon === pokemon.id}
@@ -22,7 +21,6 @@ const PokemonList: FC = () => {
             ))}
         </List>
     )
-
 
     return (
         <div className="PokemonList-wrapper">

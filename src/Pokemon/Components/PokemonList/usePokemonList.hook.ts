@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import usePokemon from "../../usePokemon.hook";
 
 interface IPokemon {
@@ -14,6 +15,8 @@ interface Returned {
 
 const usePokemonList = (): Returned => {
 
+    const history = useHistory();
+
     const {pokemonMethods, pokemonState} = usePokemon()
 
     useEffect(() => {
@@ -21,7 +24,8 @@ const usePokemonList = (): Returned => {
     }, [])
 
     useEffect(() => {
-        if(pokemonState.activePokemon.id) pokemonMethods.get_pokemon(pokemonState.activePokemon.id)
+        // запрашиваем с бека информацию по активному покемону, если установлен айди активного покемона
+        if (pokemonState.activePokemon.id) pokemonMethods.get_pokemon(pokemonState.activePokemon.id)
     }, [pokemonState.activePokemon.id])
 
     const pokemonList: IPokemon[] | null = pokemonState.pokemonList && pokemonState.pokemonList.map(pokemon => ({
@@ -29,11 +33,15 @@ const usePokemonList = (): Returned => {
         id: pokemonMethods.getPokemonIdxFromLink(pokemon.url)[1]
     }))
 
+    const changeSelectedPokemon = (id: number): void => {
+        pokemonMethods.change_active_pokemon(id);
+        history.push(`/pokemon/${id}`)
+    }
 
     return {
         pokemonList,
         activePokemon: pokemonState.activePokemon.id,
-        changeSelectedPokemon: pokemonMethods.change_active_pokemon,
+        changeSelectedPokemon,
     }
 }
 
